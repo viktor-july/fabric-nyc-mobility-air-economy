@@ -1,0 +1,218 @@
+table FactTaxiDaily
+	lineageTag: 11937d4a-d08f-421a-85c4-9a5f0987c33a
+	sourceLineageTag: [dbo].[FactTaxiDaily]
+
+	measure 'Revenue USD' = SUM(FactTaxiDaily[total_usd_sum])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 23922df6-3d07-433e-b7d1-8e3d70ea1123
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Avg Revenue per Trip USD' = DIVIDE([Revenue USD], [Total Trips])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 45c71f47-07b2-4c10-a248-34ce0afedbcf
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Avg PM2.5 NYC' =
+			
+			CALCULATE(
+			    AVERAGE(FactAirQualityDaily[pm25_avg]),
+			    DimStation[in_nyc] = TRUE()
+			)
+		formatString: 0.00
+		lineageTag: b1cd701b-f75b-4d1e-b238-258e55d1cbca
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+	measure 'Avg NO2 NYC' =
+			
+			CALCULATE(
+			    AVERAGE(FactAirQualityDaily[no2_avg]),
+			    DimStation[in_nyc] = TRUE()
+			)
+		lineageTag: b9e505b4-d8a7-441c-b340-aee059253b7d
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Trips' = SUM(FactTaxiDaily[trips])
+		formatString: #,0
+		lineageTag: 0d60a43b-80f2-4ffb-bfe4-d3151d9e943f
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+	measure 'Revenue EUR' =
+			
+			SUMX(
+			    VALUES(DimDate[date_key]),
+			    [Revenue USD] * CALCULATE(MAX(DimFX[eur_per_usd]))
+			)
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		lineageTag: 7b4e050b-5205-4f5d-afeb-79d5ab7f8824
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+	measure 'Avg Revenue per Trip EUR' = DIVIDE([Revenue EUR], [Total Trips])
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		lineageTag: 57688acd-ef9d-4e4c-81a0-e043bb9b0a5c
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+	measure 'GDP USD tn' =
+			
+			VAR y = MAX(DimDate[year])
+			RETURN
+			CALCULATE(
+			    SUM(DimGDP[gdp_usd]) / 1e12,
+			    TREATAS({y}, DimGDP[year])
+			)
+		formatString: 0.00
+		lineageTag: 81e15ded-bab1-469b-8c80-8800a3f02cca
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+	column date_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 7e40657d-8f54-4b6f-8ec0-da6b3dfdc539
+		sourceLineageTag: date_key
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column zone_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 6fb8d0b7-6446-4c51-89d6-b99b7670fe0e
+		sourceLineageTag: zone_id
+		summarizeBy: none
+		sourceColumn: zone_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column trips
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 41443f37-902b-45db-9c99-1ee9c887761d
+		sourceLineageTag: trips
+		summarizeBy: sum
+		sourceColumn: trips
+
+		annotation SummarizationSetBy = Automatic
+
+	column passengers_sum
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: e8ba53b1-b254-4a5e-a85f-e07939ed48f8
+		sourceLineageTag: passengers_sum
+		summarizeBy: sum
+		sourceColumn: passengers_sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column distance_miles_sum
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 78895232-327a-41e0-a8b6-ca7208e7c98d
+		sourceLineageTag: distance_miles_sum
+		summarizeBy: sum
+		sourceColumn: distance_miles_sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column duration_min_sum
+		dataType: double
+		sourceProviderType: float
+		lineageTag: b80c427c-2199-4771-9922-6a9be413330e
+		sourceLineageTag: duration_min_sum
+		summarizeBy: sum
+		sourceColumn: duration_min_sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fare_usd_sum
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 5a3de1ca-0e71-4b26-9fae-dca76839c417
+		sourceLineageTag: fare_usd_sum
+		summarizeBy: sum
+		sourceColumn: fare_usd_sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column tip_usd_sum
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 2501961d-e78b-4566-b952-f10aa0affa82
+		sourceLineageTag: tip_usd_sum
+		summarizeBy: sum
+		sourceColumn: tip_usd_sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column tolls_usd_sum
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 9bad486b-d0ba-48cb-8c13-476243c1952f
+		sourceLineageTag: tolls_usd_sum
+		summarizeBy: sum
+		sourceColumn: tolls_usd_sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_usd_sum
+		dataType: double
+		sourceProviderType: float
+		lineageTag: beac6c42-633e-417f-a423-60136fb7b1f0
+		sourceLineageTag: total_usd_sum
+		summarizeBy: sum
+		sourceColumn: total_usd_sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition FactTaxiDaily = entity
+		mode: directLake
+		source
+			entityName: FactTaxiDaily
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

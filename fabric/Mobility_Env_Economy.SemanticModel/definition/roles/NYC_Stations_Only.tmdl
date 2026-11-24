@@ -1,0 +1,7 @@
+role NYC_Stations_Only
+	modelPermission: read
+
+	tablePermission DimStation = [in_nyc] == true()
+
+	annotation PBI_Id = 36ff8b57b4304a1bb7dc98482c13c557
+

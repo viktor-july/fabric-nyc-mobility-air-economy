@@ -1,0 +1,76 @@
+table FactTaxiDaypart
+	lineageTag: 00d6fd27-722a-4606-a36c-ae980506adf3
+	sourceLineageTag: [dbo].[FactTaxiDaypart]
+
+	measure 'Daypart Trips' = SUM(FactTaxiDaypart[trips])
+		formatString: #,0
+		lineageTag: bcfc0dd0-6262-4846-bcf6-c8ed60949a13
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+	column date_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: a33b1795-34cb-49e4-b3fd-448c274f60c2
+		sourceLineageTag: date_key
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column zone_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 173a1252-10c1-4f23-84b2-19e4d0ac3d6d
+		sourceLineageTag: zone_id
+		summarizeBy: none
+		sourceColumn: zone_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column daypart
+		dataType: string
+		sourceProviderType: varchar(20)
+		lineageTag: 511ad44c-564a-44d6-9684-763bf69bc00a
+		sourceLineageTag: daypart
+		summarizeBy: none
+		sourceColumn: daypart
+
+		annotation SummarizationSetBy = Automatic
+
+	column trips
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: ad454b08-1e31-457d-9b3c-3b02c9376f48
+		sourceLineageTag: trips
+		summarizeBy: sum
+		sourceColumn: trips
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_usd_sum
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 9c3645e3-0f3f-44c9-8e16-d126436a966f
+		sourceLineageTag: total_usd_sum
+		summarizeBy: sum
+		sourceColumn: total_usd_sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition FactTaxiDaypart = entity
+		mode: directLake
+		source
+			entityName: FactTaxiDaypart
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

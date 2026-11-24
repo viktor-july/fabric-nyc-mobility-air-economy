@@ -1,0 +1,75 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.15.0/schema.json",
+  "name": "8e5c77bb6294951809ea",
+  "position": {
+    "x": 1228.3333333333335,
+    "y": 648.33333333333337,
+    "z": 8000,
+    "height": 371.66666666666669,
+    "width": 260,
+    "tabOrder": 8000
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactTaxiDaypart"
+                    }
+                  },
+                  "Property": "daypart"
+                }
+              },
+              "queryRef": "FactTaxiDaypart.daypart",
+              "nativeQueryRef": "daypart",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactTaxiDaypart"
+                    }
+                  },
+                  "Property": "Daypart Trips"
+                }
+              },
+              "queryRef": "FactTaxiDaypart.Daypart Trips",
+              "nativeQueryRef": "Daypart Trips"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "FactTaxiDaypart"
+                  }
+                },
+                "Property": "Daypart Trips"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

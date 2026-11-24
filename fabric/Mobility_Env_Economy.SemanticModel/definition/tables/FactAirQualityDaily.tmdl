@@ -1,0 +1,170 @@
+table FactAirQualityDaily
+	lineageTag: fcf77d46-850a-49aa-a880-b842131732c4
+	sourceLineageTag: [dbo].[FactAirQualityDaily]
+
+	measure 'Avg PM2.5' = AVERAGE(FactAirQualityDaily[pm25_avg])
+		formatString: 0.00
+		lineageTag: dd71b82b-4700-4baf-8f8d-1e90c666a9d1
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+	measure 'Avg NO2 ppb' = AVERAGE(FactAirQualityDaily[no2_avg]) * 1000
+		formatString: 0.0
+		lineageTag: 0a3498c3-817a-4776-a074-e1c9413672fb
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+	measure 'Avg NO2 NYC ppb' = [Avg NO2 NYC] * 1000
+		lineageTag: fab0a764-e9c0-402c-8bb1-212b8a3eafa7
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg O3 NYC ppb' = CALCULATE(AVERAGE(FactAirQualityDaily[o3_avg]), DimStation[in_nyc] = TRUE()) * 1000
+		formatString: 0.0
+		lineageTag: acf5fe56-b2f5-43e2-be1b-5336c2b00483
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+	measure 'Avg NO2 Jersey City ppb' = CALCULATE(AVERAGE(FactAirQualityDaily[no2_avg]), DimStation[location_name] = "Jersey City") * 1000
+		formatString: 0.0
+		lineageTag: 44d5fdde-e861-4c0f-b27e-9efabcd0329f
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+	column date_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 68957d2a-8710-4f72-8bcd-6c0694de0249
+		sourceLineageTag: date_key
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column location_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 76a95c3b-952f-4c47-8255-37bff3dcb7fc
+		sourceLineageTag: location_id
+		summarizeBy: none
+		sourceColumn: location_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column pm25_avg
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 0bf61067-1ff7-409d-927f-6c73db70fd8c
+		sourceLineageTag: pm25_avg
+		summarizeBy: sum
+		sourceColumn: pm25_avg
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column no2_avg
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 9c375a2e-0fba-423a-857c-da9d54c07022
+		sourceLineageTag: no2_avg
+		summarizeBy: sum
+		sourceColumn: no2_avg
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column o3_avg
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 21cbbb3d-7f45-4733-9559-6d0cdad866be
+		sourceLineageTag: o3_avg
+		summarizeBy: sum
+		sourceColumn: o3_avg
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column co_avg
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 0c5253f5-70ef-4c47-8249-4b9baf5ea6eb
+		sourceLineageTag: co_avg
+		summarizeBy: sum
+		sourceColumn: co_avg
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column so2_avg
+		dataType: double
+		sourceProviderType: float
+		lineageTag: cd4e0e17-d7cd-4041-bc8d-688a84b599bb
+		sourceLineageTag: so2_avg
+		summarizeBy: sum
+		sourceColumn: so2_avg
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column pm10_avg
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 904c5737-bb9f-4001-a9e7-094177085211
+		sourceLineageTag: pm10_avg
+		summarizeBy: sum
+		sourceColumn: pm10_avg
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column no_avg
+		dataType: double
+		sourceProviderType: float
+		lineageTag: b9ea557e-16ae-4996-9d3e-38495aa9d406
+		sourceLineageTag: no_avg
+		summarizeBy: sum
+		sourceColumn: no_avg
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nox_avg
+		dataType: double
+		sourceProviderType: float
+		lineageTag: afc750f0-3293-47a3-9282-e0385dc06aed
+		sourceLineageTag: nox_avg
+		summarizeBy: sum
+		sourceColumn: nox_avg
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition FactAirQualityDaily = entity
+		mode: directLake
+		source
+			entityName: FactAirQualityDaily
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

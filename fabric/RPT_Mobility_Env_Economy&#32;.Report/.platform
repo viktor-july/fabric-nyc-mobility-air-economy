@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "RPT_Mobility_Env_Economy "
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "7e79c9c3-09d1-b77a-4152-0aae0593c581"
+  }
+}

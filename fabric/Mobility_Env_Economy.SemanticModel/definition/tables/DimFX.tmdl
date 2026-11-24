@@ -1,0 +1,70 @@
+table DimFX
+	lineageTag: 4008e85e-173d-41b0-b4fc-9289dbceacc3
+	sourceLineageTag: [dbo].[DimFX]
+
+	column date_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 99a34466-a1cf-4ead-b8e3-779fee8973eb
+		sourceLineageTag: date_key
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 7d44f3bb-a69e-455f-bd7b-bc6f1d93c5a5
+		sourceLineageTag: date
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+	column usd_per_eur
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 851e2419-9f82-4cc7-b659-4662c880f7ca
+		sourceLineageTag: usd_per_eur
+		summarizeBy: sum
+		sourceColumn: usd_per_eur
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column eur_per_usd
+		dataType: double
+		sourceProviderType: float
+		lineageTag: aeeb2d30-db33-44cc-ae9c-b372cc193ee3
+		sourceLineageTag: eur_per_usd
+		summarizeBy: sum
+		sourceColumn: eur_per_usd
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column is_filled
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 35d81a2a-218c-4ea0-9489-b880148c3025
+		sourceLineageTag: is_filled
+		summarizeBy: none
+		sourceColumn: is_filled
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimFX = entity
+		mode: directLake
+		source
+			entityName: DimFX
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

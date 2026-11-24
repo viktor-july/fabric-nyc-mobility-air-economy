@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Mobility_Env_Economy"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "a2c0ef8d-06b6-96c8-47ea-031160c499a5"
+  }
+}

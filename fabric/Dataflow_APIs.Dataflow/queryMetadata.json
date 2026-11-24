@@ -1,0 +1,56 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {
+    "allowModernEvaluationEngine": true
+  },
+  "name": "Dataflow_APIs",
+  "queryGroups": [],
+  "documentLocale": "en-GB",
+  "queriesMetadata": {
+    "Bronze_FX": {
+      "queryId": "a9cbf9e7-678f-4ab9-94cc-47e7dfb05fb8",
+      "queryName": "Bronze_FX",
+      "loadEnabled": false
+    },
+    "Bronze_FX_DataDestination": {
+      "queryId": "aadb1544-7728-45ae-929e-947901446928",
+      "queryName": "Bronze_FX_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "NavigationQuery": {
+      "queryId": "9fed9fc5-bcda-4be4-85e5-1c35fe3fcbaa",
+      "queryName": "NavigationQuery",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "US_GDP": {
+      "queryId": "d4238776-3781-4d03-8cd2-53383bb53d96",
+      "queryName": "US_GDP",
+      "loadEnabled": false
+    },
+    "US_GDP_DataDestination": {
+      "queryId": "333741a8-c7e5-44fc-a488-5028003c8920",
+      "queryName": "US_GDP_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "https://data-api.ecb.europa.eu/service/data/EXR/D.USD.EUR.SP00.A?format=csvdata",
+      "kind": "Web",
+      "connectionId": "{\"ClusterId\":\"7c822aef-2f1f-42c8-91b0-a770dbf107b3\",\"DatasourceId\":\"b9201ffe-92e2-4e8e-8b9a-6eba2ea8ee4c\"}"
+    },
+    {
+      "path": "https://api.worldbank.org/v2/country/USA/indicator/NY.GDP.MKTP.CD?format=json&per_page=100",
+      "kind": "Web",
+      "connectionId": "{\"ClusterId\":\"7c822aef-2f1f-42c8-91b0-a770dbf107b3\",\"DatasourceId\":\"1e913a7a-7bfc-4aeb-b3cc-6fed110c1041\"}"
+    },
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"7c822aef-2f1f-42c8-91b0-a770dbf107b3\",\"DatasourceId\":\"0c04ac1a-8880-4aa5-87be-2ee0da7f1c7d\"}"
+    }
+  ]
+}

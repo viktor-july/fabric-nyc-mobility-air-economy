@@ -1,0 +1,132 @@
+table DimStation
+	lineageTag: aa1a8d52-6b80-4ef4-b47a-c4c173273cdd
+	sourceLineageTag: [dbo].[DimStation]
+
+	column location_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 86efcd2f-c1fc-42e0-a631-ee052dcc308b
+		sourceLineageTag: location_id
+		summarizeBy: none
+		sourceColumn: location_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column location_name
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: 23782fa5-5f6f-4fdb-8752-14f1915c3826
+		sourceLineageTag: location_name
+		summarizeBy: none
+		sourceColumn: location_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column latitude
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 8dd92a76-509a-4890-8da2-a49a5750fee9
+		sourceLineageTag: latitude
+		summarizeBy: none
+		sourceColumn: latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column longitude
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 766da46d-b4fd-4561-8377-169ca73dc873
+		sourceLineageTag: longitude
+		summarizeBy: none
+		sourceColumn: longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column zone_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 8cd27fdf-dee3-4372-bef6-5d185ecfea2b
+		sourceLineageTag: zone_id
+		summarizeBy: none
+		sourceColumn: zone_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column zone_borough
+		dataType: string
+		sourceProviderType: varchar(50)
+		lineageTag: a9861299-e4a0-4ecc-8259-a315d713d10b
+		sourceLineageTag: zone_borough
+		summarizeBy: none
+		sourceColumn: zone_borough
+
+		annotation SummarizationSetBy = Automatic
+
+	column zone_name
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: d230dab1-9f1b-4216-bb43-74947c5be7ed
+		sourceLineageTag: zone_name
+		summarizeBy: none
+		sourceColumn: zone_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column match_type
+		dataType: string
+		sourceProviderType: varchar(20)
+		lineageTag: db7255bd-e08e-4108-918d-bae354e5b7d4
+		sourceLineageTag: match_type
+		summarizeBy: none
+		sourceColumn: match_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column distance_km
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 10bae100-b1a2-484f-b042-0073386b8643
+		sourceLineageTag: distance_km
+		summarizeBy: none
+		sourceColumn: distance_km
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column in_nyc
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 8eef42ad-017a-4928-aaf9-fdea63c16217
+		sourceLineageTag: in_nyc
+		summarizeBy: none
+		sourceColumn: in_nyc
+
+		annotation SummarizationSetBy = Automatic
+
+	column zone_link_quality
+		dataType: string
+		sourceProviderType: varchar(20)
+		lineageTag: b878c38e-dea5-4840-a3c0-bdeff4852bd3
+		sourceLineageTag: zone_link_quality
+		summarizeBy: none
+		sourceColumn: zone_link_quality
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimStation = entity
+		mode: directLake
+		source
+			entityName: DimStation
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+
