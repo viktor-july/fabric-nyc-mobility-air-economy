@@ -181,9 +181,9 @@ This is a learning project on open data. The policies are written as if the plat
 
 | Role | Responsibility | Current holder |
 |---|---|---|
-| Data owner | Decides scope, sources and access | Project owner (you) |
-| Data engineer | Pipelines, Dataflow, notebook, Warehouse load | Project owner (you) |
-| Report author | Semantic model, measures, report | Project owner (you) |
+| Data owner | Decides scope, sources and access | Project owner |
+| Data engineer | Pipelines, Dataflow, notebook, Warehouse load | Project owner |
+| Report author | Semantic model, measures, report | Project owner |
 | Report consumer | Views report, subject to RLS | Viewers (none assigned in the trial workspace) |
 
 **Policy B.3.1:** Only workspace Admin, Member and Contributor roles may change items. Consumers get the Viewer role or access to the report only.
