@@ -28,7 +28,7 @@ flowchart LR
         D1["Dataflow Gen2<br/>(daily scheduled refresh)"]
     end
 
-    subgraph BRZ["Bronze - Lakehouse LH_taxi"]
+    subgraph BRZ["Bronze - Lakehouse LH_Taxi"]
         B1["Files/Bronze/Taxi/yellow<br/>120 Parquet files"]
         B2["Bronze_OpenAQ_Daily"]
         B3["bronze_openaq_stations"]
@@ -37,7 +37,7 @@ flowchart LR
         B6["Files/Bronze/Taxi/reference<br/>taxi_zone_lookup.csv"]
     end
 
-    subgraph SLV["Silver - Lakehouse LH_taxi"]
+    subgraph SLV["Silver - Lakehouse LH_Taxi"]
         V1["silver_taxi_trips"]
         V2["silver_openaq_daily"]
         V3["silver_fx_daily"]
@@ -46,14 +46,14 @@ flowchart LR
         V6["silver_station_to_zone"]
     end
 
-    subgraph GLD["Gold staging - Lakehouse LH_taxi"]
+    subgraph GLD["Gold staging - Lakehouse LH_Taxi"]
         G1["gold_taxi_daily"]
         G2["gold_taxi_daypart"]
         G3["gold_air_quality_daily"]
         G4["gold_dim_date / zone /<br/>station / fx / gdp"]
     end
 
-    subgraph WH["Warehouse WH_Mobility_Env_Economy"]
+    subgraph WH["Warehouse Warehouse"]
         W1["FactTaxiDaily<br/>FactTaxiDaypart"]
         W2["FactAirQualityDaily"]
         W3["DimDate, DimZone, DimStation,<br/>DimFX, DimGDP"]
@@ -99,7 +99,7 @@ flowchart LR
     SM --> RPT
 ```
 
-**Reading the diagram:** data moves from left to right. Taxi files go through the pipeline. The three API sources go through the Dataflow (only the station coordinates were loaded once by a notebook). The Silver and Gold steps are PySpark in `NB_Transformations`. The Warehouse reads the Lakehouse by three-part name (`LH_taxi.dbo.<table>`). The semantic model uses Direct Lake on the Warehouse tables.
+**Reading the diagram:** data moves from left to right. Taxi files go through the pipeline. The three API sources go through the Dataflow (only the station coordinates were loaded once by a notebook). The Silver and Gold steps are PySpark in `NB_Transformations`. The Warehouse reads the Lakehouse by three-part name (`LH_Taxi.dbo.<table>`). The semantic model uses Direct Lake on the Warehouse tables.
 
 > `bronze_openaq_stations` was written by a Spark notebook on 13 Nov 2026 at 18:50 (one `CREATE OR REPLACE TABLE AS SELECT`, notebook ID `0452ad1a-de76-435f-9c20-b33889731d6a`, the only notebook shown in the lineage view). Source: `DESCRIBE HISTORY bronze_openaq_stations`.
 
@@ -123,7 +123,7 @@ flowchart LR
 | 14 | `gold_taxi_daypart` | `silver_taxi_trips` | Aggregate to date × zone × daypart | `NB_Transformations` | Manual |
 | 15 | `gold_air_quality_daily` | `silver_openaq_daily` | Pivot parameters to columns, date × station | `NB_Transformations` | Manual |
 | 16 | `gold_dim_date`, `gold_dim_zone`, `gold_dim_station`, `gold_dim_fx`, `gold_dim_gdp` | Silver tables, `silver_station_to_zone` | Build dimensions, add `in_nyc` and `zone_link_quality` | `NB_Transformations` | Manual |
-| 17 | `Dim*`, `Fact*` in the Warehouse | `LH_taxi.dbo.gold_*` | `CREATE TABLE` + `INSERT ... SELECT`, 2016–2025 only | Warehouse SQL | Manual |
+| 17 | `Dim*`, `Fact*` in the Warehouse | `LH_Taxi.dbo.gold_*` | `CREATE TABLE` + `INSERT ... SELECT`, 2016–2025 only | Warehouse SQL | Manual |
 | 18 | Semantic model `Mobility_Env_Economy` | Warehouse tables | Relationships, measures, RLS roles | Power BI web modeling | Direct Lake, auto-update on |
 | 19 | Report `RPT_Mobility_Env_Economy` | Semantic model | Visuals on 4 pages | Power BI web report editor | Live |
 
@@ -146,14 +146,14 @@ Reviewed on 24 Nov 2026 (workspace → **Lineage view**). The view shows two sep
 **Flow 1: ingestion**
 - The ECB data API and the World Bank API (USA data) feed `Dataflow_APIs`, a Dataflow Gen2 (CI/CD) item.
 - An HTTP server (the TLC CloudFront address) feeds the pipeline `PL_Ingestion`.
-- `Dataflow_APIs` writes to `LH_taxi`. `LH_taxi` is connected to the notebook, to its SQL analytics endpoint and to `PL_Ingestion`.
+- `Dataflow_APIs` writes to `LH_Taxi`. `LH_Taxi` is connected to the notebook, to its SQL analytics endpoint and to `PL_Ingestion`.
 
 **Flow 2: reporting**
 - Warehouse → semantic model `Mobility_Env_Economy` → report. The semantic model shows a last refresh of 23 Nov 2026, 04:06.
 
 **Differences from the table-level lineage in A.2** (limits of the view, not errors in the data):
 1. OpenAQ is not shown as a source of `Dataflow_APIs`, although the dataflow loads `Bronze_OpenAQ_Daily` (A.2, row 2). Only the ECB and World Bank sources appear.
-2. The two flows are not connected. The step from `LH_taxi` to the Warehouse is not shown, probably because the Warehouse tables were loaded with SQL queries that read `LH_taxi` by three-part name.
+2. The two flows are not connected. The step from `LH_Taxi` to the Warehouse is not shown, probably because the Warehouse tables were loaded with SQL queries that read `LH_Taxi` by three-part name.
 3. The view stops at item level. A.2 adds the table-level steps.
 
 ---
@@ -162,7 +162,7 @@ Reviewed on 24 Nov 2026 (workspace → **Lineage view**). The view shows two sep
 
 ## B.1 Purpose and scope
 
-These policies describe how the data platform is owned, accessed, refreshed and controlled. They cover all items in the Fabric workspace: Lakehouse `LH_taxi`, Warehouse `WH_Mobility_Env_Economy`, Dataflow, Pipeline, Notebook, semantic model `Mobility_Env_Economy` and report `RPT_Mobility_Env_Economy`.
+These policies describe how the data platform is owned, accessed, refreshed and controlled. They cover all items in the Fabric workspace: Lakehouse `LH_Taxi`, Warehouse `Warehouse`, Dataflow, Pipeline, Notebook, semantic model `Mobility_Env_Economy` and report `RPT_Mobility_Env_Economy`.
 
 This is a learning project on open data. The policies are written as if the platform were used by a real team, so the framework can be reused.
 
@@ -264,7 +264,7 @@ RLS roles are defined in the semantic model `Mobility_Env_Economy`:
 | Measure names | Must not equal a column name (names are case-insensitive). Example: `Total Trips`, not `Trips` |
 | Measure formatting | Set in the semantic model (Properties → Formatting) |
 | Hidden items | `staginglakehousefordataflows` is system-managed. Do not delete |
-| Dataflow outputs | Each query needs a Data destination pointing to `LH_taxi` |
+| Dataflow outputs | Each query needs a Data destination pointing to `LH_Taxi` |
 | Warehouse DDL | Run `DROP`, `CREATE`, `INSERT`, `ALTER` as separate queries |
 | Keys | Primary keys in the Warehouse are NOT ENFORCED, so integrity is checked by validation queries |
 
