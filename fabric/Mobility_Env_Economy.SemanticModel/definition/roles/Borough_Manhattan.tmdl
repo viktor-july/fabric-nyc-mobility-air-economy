@@ -1,7 +1,0 @@
-role Borough_Manhattan
-	modelPermission: read
-
-	tablePermission DimZone = [borough] == "Manhattan"
-
-	annotation PBI_Id = 1defc6423b884b948fc64586d4e743a2
-

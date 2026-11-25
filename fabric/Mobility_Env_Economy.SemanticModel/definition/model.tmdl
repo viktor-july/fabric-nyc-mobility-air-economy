@@ -22,6 +22,3 @@ ref table DimStation
 ref table DimFX
 ref table FactTaxiDaypart
 
-ref role Borough_Manhattan
-ref role NYC_Stations_Only
-
