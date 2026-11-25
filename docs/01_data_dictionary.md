@@ -1,13 +1,5 @@
 # Data Dictionary
 
-**Project:** Microsoft Fabric – Mobility (NYC Taxi) + Air Quality (OpenAQ) + Economy (GDP & FX)
-**Last updated:** 22 Nov 2026
-**Source of this document:** project logs (10 Nov – 18 Nov 2026) plus the RLS test of 22 Nov 2026
-
-> **How to read this file**
-> - Column lists, measures and formats were checked against the live Fabric items on 23–24 Nov 2026.
-
----
 
 ## 0. Environment
 
