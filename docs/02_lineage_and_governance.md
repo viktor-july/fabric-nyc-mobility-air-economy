@@ -1,11 +1,5 @@
 # Data Lineage and Governance Policies
 
-**Project:** Microsoft Fabric – Mobility (NYC Taxi) + Air Quality (OpenAQ) + Economy (GDP & FX)
-**Last updated:** 22 Nov 2026
-**Related documents:** `01_data_dictionary.md` (table and column details)
-
-> The diagrams use Mermaid. Most Markdown viewers (GitHub, GitLab, VS Code with an extension) render them. For Word or PDF, paste the code into https://mermaid.live and export a PNG or SVG. Every diagram also has a table version, which works anywhere.
-
 ---
 
 # Part A – Lineage
