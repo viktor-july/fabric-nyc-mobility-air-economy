@@ -190,9 +190,9 @@ This is a result about the data available, not proof that traffic has no effect 
 
 | Deliverable (from the scope) | Status | Where |
 |---|---|---|
-| Fabric Lakehouse (Bronze, Silver, Gold) with three datasets | Done | `LH_taxi` |
+| Fabric Lakehouse (Bronze, Silver, Gold) with three datasets | Done | `LH_Taxi` |
 | ETL pipelines and Dataflows for ingestion | Done. Dataflow refresh is automatic. Pipeline is run manually by design | `PL_Ingestion`, Dataflow Gen2 |
-| Fabric Warehouse with star schema | Done and validated | `WH_Mobility_Env_Economy` |
+| Fabric Warehouse with star schema | Done and validated | `Warehouse` |
 | Visualizations (mobility, environment, economy) | Done | `RPT_Mobility_Env_Economy` |
 | Documentation: data dictionary | Done | `01_data_dictionary.md` |
 | Documentation: lineage diagrams | Done | `02_lineage_and_governance.md`, Part A |
