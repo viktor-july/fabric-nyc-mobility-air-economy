@@ -210,6 +210,7 @@ RLS roles are defined in the semantic model `Mobility_Env_Economy`:
 - The two roles filter different dimension tables. `DimStation` and `DimZone` have no relationship, so a zone role does not filter air quality. A user who needs both restrictions must be a member of both roles.
 - RLS applies only to users with the Viewer role (or read access to the model). Workspace Admin, Member and Contributor roles bypass it.
 - The first role test failed with an SSO error and worked after signing in again with fresh credentials.
+- The roles were removed afterwards, because a report with RLS cannot be published to the web. The report uses open data only, so a public read-only link was chosen instead.
 
 **Policy B.4.1:** Every report audience that must be restricted gets a role. Members are assigned in the semantic model's Security menu, not by sharing the Warehouse directly.
 **Policy B.4.2:** Each new role must be tested with "Test as role" and checked against a SQL query before release.
