@@ -1,12 +1,5 @@
 # Urban Mobility, Air Quality and Economy in NYC: Final Write-up
 
-**Project:** Unified analytics platform on Microsoft Fabric
-**Period analysed:** 2016–2025
-**Last updated:** 22 Nov 2026
-**Related documents:** `01_data_dictionary.md`, `02_lineage_and_governance.md`
-
-
----
 
 ## 1. Summary
 
