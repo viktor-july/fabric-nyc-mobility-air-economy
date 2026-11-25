@@ -14,25 +14,25 @@
 | Item | Name | Purpose |
 |---|---|---|
 | Workspace | Fabric trial workspace | Container for all items |
-| Lakehouse | `LH_taxi` | Bronze, Silver and Gold-staging tables (schema `dbo`) |
+| Lakehouse | `LH_Taxi` | Bronze, Silver and Gold-staging tables (schema `dbo`) |
 | Hidden helper | `staginglakehousefordataflows` | Auto-created by Dataflow Gen2. Do not delete |
-| Warehouse | `WH_Mobility_Env_Economy` | Final Gold star schema |
-| Notebook | `NB_Transformations` | PySpark, `LH_taxi` is the default lakehouse |
+| Warehouse | `Warehouse` | Final Gold star schema |
+| Notebook | `NB_Transformations` | PySpark, `LH_Taxi` is the default lakehouse |
 | Pipeline | `PL_Ingestion` | Loads the 120 taxi Parquet files (manual run) |
 | Dataflow Gen2 | APIs dataflow | OpenAQ, ECB FX, World Bank GDP (daily refresh) |
 | Semantic model | `Mobility_Env_Economy` | Direct Lake, built on the Warehouse |
 | Report | `RPT_Mobility_Env_Economy` | 4 pages |
 
-**Naming convention:** Bronze and Silver are tables in `LH_taxi` named `bronze_*` and `silver_*`. Gold staging tables are named `gold_*`. The final star schema lives in the Warehouse (`Dim*`, `Fact*`).
+**Naming convention:** Bronze and Silver are tables in `LH_Taxi` named `bronze_*` and `silver_*`. Gold staging tables are named `gold_*`. The final star schema lives in the Warehouse (`Dim*`, `Fact*`).
 
 **Layer overview**
 
 | Layer | Location | Content |
 |---|---|---|
-| Bronze | `LH_taxi` (Files and Tables) | Raw data as ingested |
-| Silver | `LH_taxi` (Tables) | Cleaned, typed, deduplicated |
-| Gold (staging) | `LH_taxi` (Tables) | Aggregated, model-ready tables |
-| Gold (final) | `WH_Mobility_Env_Economy` | Star schema used by Power BI |
+| Bronze | `LH_Taxi` (Files and Tables) | Raw data as ingested |
+| Silver | `LH_Taxi` (Tables) | Cleaned, typed, deduplicated |
+| Gold (staging) | `LH_Taxi` (Tables) | Aggregated, model-ready tables |
+| Gold (final) | `Warehouse` | Star schema used by Power BI |
 
 ---
 
@@ -116,7 +116,7 @@ Station IDs: 1496, 857, 971, 1122, 628, 626, 666, 665, 648, 631, 664, 384, 625, 
 | Rows | 265 |
 | Columns | `LocationID`, `Borough`, `Zone`, `service_zone` |
 
-> **Note on Dataflows:** each Dataflow query needs a Data destination that points to `LH_taxi`. Without it, the data goes to the hidden staging lakehouse.
+> **Note on Dataflows:** each Dataflow query needs a Data destination that points to `LH_Taxi`. Without it, the data goes to the hidden staging lakehouse.
 
 ---
 
@@ -227,7 +227,7 @@ Units: gases in ppm, particulate matter in µg/m³.
 
 ---
 
-## 3. Gold layer – staging tables in `LH_taxi`
+## 3. Gold layer – staging tables in `LH_Taxi`
 
 | Table | Rows | Grain | Notes |
 |---|---|---|---|
@@ -256,9 +256,9 @@ Dayparts have different lengths, so bars are not comparable per hour.
 
 ---
 
-## 4. Warehouse – `WH_Mobility_Env_Economy` (schema `dbo`)
+## 4. Warehouse – `Warehouse` (schema `dbo`)
 
-The Warehouse reads the Lakehouse by three-part name (`LH_taxi.dbo.<table>`).
+The Warehouse reads the Lakehouse by three-part name (`LH_Taxi.dbo.<table>`).
 
 ### 4.1 Dimensions
 
