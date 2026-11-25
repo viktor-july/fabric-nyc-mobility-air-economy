@@ -36,7 +36,7 @@ The full lineage diagram is in [docs/02_lineage_and_governance.md](docs/02_linea
 
 Live report (read-only, public): [RPT_Mobility_Env_Economy](https://app.fabric.microsoft.com/view?r=eyJrIjoiMTQ2ODdjMWYtYTZiYi00ZmM1LThmYjItMTUzZGY0MjEzNjVhIiwidCI6IjYzOGQ1NWY5LTJmMGYtNDBlYS05NTRlLTgzNzU1MjVmZTMxYiJ9)
 
-Full report export: [RPT_Mobility_Env_Economy.pdf](docs/RPT_Mobility_Env_Economy .pdf)
+Full report export: [RPT_Mobility_Env_Economy.pdf](docs/RPT_Mobility_Env_Economy.pdf)
 
 ![Mobility](images/page-1.jpg)
 ![Air Quality](images/page-2.jpg)
