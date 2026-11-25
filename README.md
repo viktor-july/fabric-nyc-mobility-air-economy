@@ -34,10 +34,10 @@ The full lineage diagram is in [docs/02_lineage_and_governance.md](docs/02_linea
 
 ## Report preview
 
-![Mobility](RPT_Mobility_Env_Economy_page-0001.jpg)
-![Air Quality](RPT_Mobility_Env_Economy_page-0002.jpg)
-![Mobility vs Air Quality](RPT_Mobility_Env_Economy_page-0003.jpg)
-![Economic Impact](RPT_Mobility_Env_Economy_page-0004.jpg)
+![Mobility](docs/RPT_Mobility_Env_Economy_page-0001.jpg)
+![Air Quality](docs/RPT_Mobility_Env_Economy_page-0002.jpg)
+![Mobility vs Air Quality](docs/RPT_Mobility_Env_Economy_page-0003.jpg)
+![Economic Impact](docs/RPT_Mobility_Env_Economy_page-0004.jpg)
 
 ## Repository structure
 
